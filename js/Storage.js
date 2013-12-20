@@ -1,10 +1,14 @@
-(function(){
+(function(localStorage){
     "use strict";
-    var Storage = function(){
+    var Storage = function(storageName){
         var that = this;
-        var storedDateList = [];
+        var storedDateList = localStorage.getItem(storageName);
+        if(storedDateList === null){
+            storedDateList = [];
+        }
+
         var autoIncrementSequence = 0;
-        var isServerDataLoaded = false;
+        this.storageName = that.storageName;
 
         var getIndex = function(id){
             var index = -1;
@@ -37,6 +41,7 @@
             data.id = autoIncrementSequence;
             storedDateList.push(data);
             autoIncrementSequence++;
+            that.sync();
 
         };
 
@@ -46,6 +51,7 @@
                 if(updateData){
                     var index = getIndex();
                     storedDateList[index] = data;
+                    that.sync();
                 }else{
                     throw new Error(data.id + " not found.");
                 }
@@ -67,13 +73,12 @@
                 }
 
             }
+            that.sync();
         };
 
         this.sync = function(){
-            if(!isServerDataLoaded){
-
-            }
+            localStorage.setItem(that.storageName, that.storedDataList);
         };
     }
     window.Storage = Storage;
-})();
+})(window.localStorage);
