@@ -1,0 +1,26 @@
+#main {
+	width : 300px;
+	border-radius: 5px;
+	background-color : ghostwhite;
+	text-align: center;
+	padding-top : 5px;
+	padding-bottom : 5px;
+	margin : 0 auto;
+}
+
+#app input{
+	width : 50px;
+}
+
+#list {
+	list-style: none;
+	padding : 0;
+	margin-left : 0;
+}
+
+#list li {
+	color : white;
+	border-radius: 5px;
+	background-color : black;
+	margin: 5px;
+}
